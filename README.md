@@ -1,16 +1,94 @@
-# AI Resume Screening: A SQL Bias Analysis
-A deep-dive investigation into the "black box" of automated recruitment. This project uses MySQL to audit 3,000 synthetic resumes, uncovering the hidden logic and systemic biases within an AI-driven shortlisting system.
+# AI Resume Screening Analysis (SQL Project)
 ## Project Overview
-Automated screening tools are often touted as objective, but they frequently inherit human biases. By applying Exploratory Data Analysis (EDA) and advanced Window Functions, I reversed-engineered the scoring patterns to see exactly what "features" the AI values most.
-## Key Discoveries
-The GitHub "Hard Floor": Regardless of education level, shortlisted candidates shared a consistent average GitHub Activity score of ~395. Anything below this threshold acted as an automatic "kill switch."
-Resume Length Bias: The AI equated quantity with quality. Shortlisted candidates averaged 633 words, while rejected ones averaged only 430 words.
-The "Substitution Effect": I quantified the experience gap—the #1 ranked PhD candidate required only 1 year of experience to achieve a perfect 100 score, whereas the #1 Bachelor’s candidate needed 12 years.
-The "Superstar" Gap: Using Window Functions, I found that High School candidates must outperform their peers by 31.7 points to be shortlisted, while PhDs only needed a 21-point lead.
-## SQL Techniques Used
-Window Functions: Utilized ROW_NUMBER(), PARTITION BY, and AVG() OVER() to rank candidates and compare them against tier-specific benchmarks.
-Complex Subqueries: Built to filter top-ranked results and perform multi-level comparisons against global averages.
-Conditional Aggregates: Leveraged SUM(CASE WHEN...) to calculate precise success rates across different demographic and educational segments.
-Data Engineering: Cleaned NULL values and optimized data types during the initial CSV import to ensure query performance.
-## Why This Matters
-This analysis highlights how "hidden" thresholds (like resume length or activity scores) can inadvertently penalize qualified candidates. It serves as a case study for why algorithmic auditing is essential in modern HR tech.
+
+This project analyzes an AI-driven resume screening dataset to understand the key factors influencing shortlisting decisions.
+
+Using structured SQL queries, I evaluated how candidate attributes such as experience, skills match score, project portfolio, GitHub activity, and resume length impact automated shortlisting outcomes.
+
+The goal was to uncover measurable patterns and ranking behaviors within the AI evaluation system.
+
+## Dataset Description
+
+The dataset includes structured candidate-level attributes such as:
+
+Years of experience
+
+Skills match score
+
+Project count
+
+GitHub activity
+
+Education level
+
+Resume length
+
+Shortlisting outcome (Yes/No)
+
+# Objectives
+
+Measure the overall shortlisting rate
+
+Compare shortlisted vs rejected candidate profiles
+
+Identify performance thresholds across key metrics
+
+Rank the top candidates within education groups
+
+Detect potential bias patterns in AI decision logic
+
+# SQL Techniques Used
+
+Aggregations (COUNT, AVG)
+
+Subqueries
+
+Conditional filtering
+
+Window functions (ROW_NUMBER, AVG OVER PARTITION)
+
+Ranking analysis
+
+Gap and variance analysis
+
+# Key Insights
+
+Approximately 70% of candidates were shortlisted.
+
+Shortlisted candidates showed significantly higher averages in:
+
+Years of experience
+
+Skills match score
+
+Project count
+
+GitHub activity
+
+Portfolio activity (GitHub engagement) strongly correlated with shortlisting outcomes.
+
+Candidates with fewer projects required higher-than-average skill scores to qualify.
+
+Resume length showed measurable differences between shortlisted and rejected profiles.
+
+Ranking analysis revealed that high skill scores could outperform education level in selection outcomes.
+
+# Analytical Approach
+
+The project followed a structured analytical workflow:
+
+Descriptive analysis of overall shortlisting rates
+
+Diagnostic comparison across candidate segments
+
+Threshold and gap analysis using subqueries
+
+Competitive ranking within education groups
+
+Insight extraction and business interpretation
+
+# Business Interpretation
+
+This analysis demonstrates how AI-based screening systems may weight portfolio strength, skill scores, and experience differently across candidate segments.
+
+It highlights the importance of measurable output (projects, GitHub activity) in automated evaluation environments.
